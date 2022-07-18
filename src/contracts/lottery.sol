@@ -7,6 +7,7 @@ contract Lottery{
     address payable public manager;
     uint index;
     event PlayerAdded(uint playerNumber, address playerAddress);
+    event WinnerPicked(address winner);
 
     constructor(){
         index = 1;
@@ -46,6 +47,7 @@ contract Lottery{
         winner = players[index];
         manager.transfer(managerFee);
         winner.transfer(winnersPrize);
+        emit WinnerPicked(winner);
         players = new address payable[](0);// resetting the lottery
     }
 }
